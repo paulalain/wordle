@@ -32,17 +32,19 @@ function App() {
     for (let i = 0; i < 5; i++) {
       currWord += board[currAttempt.attempt][i];
     }
+
     if (wordSet.has(currWord.toLowerCase())) {
       setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 });
     } else {
-      alert("Word not found");
+      alert("Le prénom n'existe pas");
     }
+
 
     if (currWord === correctWord) {
       setGameOver({ gameOver: true, guessedWord: true });
       return;
     }
-    console.log(currAttempt);
+
     if (currAttempt.attempt === 5) {
       setGameOver({ gameOver: true, guessedWord: false });
       return;
@@ -72,6 +74,22 @@ function App() {
     <div className="App">
       <nav>
         <h1>Wordle</h1>
+        {gameOver.gameOver ? <div></div> : 
+          <div>
+            <h3>
+              Comment jouer ?
+            </h3>
+            <p>
+              Nous avons une bonne nouvelle à vous annoncer. Mais avant celà il va falloir jouer un peu.
+              Deviner le prénom en 6 essais. Chaque essai doit être un prénom existant de 5 lettres. <br />Valider votre réponse en appuyant sur Entrée.<br /><br />
+
+              La couleur de chaque case va changer pour montrer si votre réponse est proche du prénom à deviner.<br />
+              Si la case est verte la lettre est correctement placée. <br />
+              Si la case est jaune la lettre est dans le prénom final mais n'est pas correctement placée. <br />
+              Si la case est grise la lettre n'est pas présente dans le prénom final. <br />
+            </p>
+          </div>
+        }
       </nav>
       <AppContext.Provider
         value={{
@@ -88,8 +106,8 @@ function App() {
           gameOver,
         }}
       >
+        {gameOver.gameOver ? <div></div> : <Board />}
         <div className="game">
-          <Board />
           {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </div>
       </AppContext.Provider>

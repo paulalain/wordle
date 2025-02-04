@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../App";
+import babyPicture from '../bebe.jpg';
 
 function GameOver() {
   const {
@@ -15,12 +16,14 @@ function GameOver() {
     <div className="gameOver">
       <h3>
         {gameOver.guessedWord
-          ? "You Correctly Guessed the Wordle"
-          : "You Failed to Guess the Word"}
+          ? "Bravo vous avez trouver le prénom !"
+          : "Raté ! Retentez votre chance."}
       </h3>
-      <h1>Correct Word: {correctWord}</h1>
       {gameOver.guessedWord && (
-        <h3>You guessed in {currAttempt.attempt} attempts</h3>
+        <p>
+          <h1>{correctWord} mesure 50cm et pèse 4,5kg</h1>
+          <img src={babyPicture} class="baby" />
+        </p>
       )}
     </div>
   );

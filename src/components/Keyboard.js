@@ -3,9 +3,9 @@ import Key from "./Key";
 import { AppContext } from "../App";
 
 function Keyboard() {
-  const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
-  const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
-  const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
+  const keys1 = ["A", "Z", "E", "R", "T", "Y", "U", "I", "O", "P"];
+  const keys2 = ["Q", "S", "D", "F", "G", "H", "J", "K", "L", "M"];
+  const keys3 = ["W", "X", "C", "V", "B", "N"];
 
   const {
     board,
