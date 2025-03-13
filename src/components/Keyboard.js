@@ -8,7 +8,6 @@ function Keyboard() {
   const keys3 = ["W", "X", "C", "V", "B", "N"];
 
   const {
-    board,
     disabledLetters,
     currAttempt,
     gameOver,
@@ -50,9 +49,8 @@ function Keyboard() {
     return () => {
       document.removeEventListener("keydown", handleKeyboard);
     };
-  }, [handleKeyboard]);
+  }, [handleKeyboard, JSON.stringify(disabledLetters)]);
 
-  console.log(disabledLetters);
   return (
     <div className="keyboard" onKeyDown={handleKeyboard}>
       <div className="line1">

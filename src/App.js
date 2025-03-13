@@ -8,7 +8,8 @@ import GameOver from "./components/GameOver";
 export const AppContext = createContext();
 
 function App() {
-  const [board, setBoard] = useState(boardDefault);
+  const [board, setBoard] = useState(structuredClone(boardDefault));
+  const [isOpen, setIsOpen] = useState(false);
   const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letter: 0 });
   const [wordSet, setWordSet] = useState(new Set());
   const [correctWord, setCorrectWord] = useState("");
@@ -24,6 +25,18 @@ function App() {
       setCorrectWord(words.todaysWord);
     });
   }, []);
+
+  const onRestart = () => {
+    setGameOver({
+      gameOver: false,
+      guessedWord: false,
+    });
+    const newBoard = [...boardDefault];
+    setBoard(newBoard);
+    console.log(board);
+    setCurrAttempt({ attempt: 0, letter: 0 });
+    setDisabledLetters([]);
+  }
 
   const onEnter = () => {
     if (currAttempt.letter !== 5) return;
@@ -74,23 +87,27 @@ function App() {
     <div className="App">
       <nav>
         <h1>Wordle</h1>
-        {gameOver.gameOver ? <div></div> : 
-          <div>
-            <h3>
-              Comment jouer ?
-            </h3>
-            <p>
-              Nous avons une bonne nouvelle à vous annoncer. Mais avant celà il va falloir jouer un peu.
-              Deviner le prénom en 6 essais. Chaque essai doit être un prénom existant de 5 lettres. <br />Valider votre réponse en appuyant sur Entrée.<br /><br />
-
-              La couleur de chaque case va changer pour montrer si votre réponse est proche du prénom à deviner.<br />
-              Si la case est verte la lettre est correctement placée. <br />
-              Si la case est jaune la lettre est dans le prénom final mais n'est pas correctement placée. <br />
-              Si la case est grise la lettre n'est pas présente dans le prénom final. <br />
-            </p>
-          </div>
-        }
       </nav>
+      {gameOver.gameOver ? <div></div> :
+        <div className="instructions" onClick={() => setIsOpen(!isOpen)}>
+          <span class="button-close">
+            {isOpen ? "▲" : "▼"}
+          </span>
+          <h3> Comment jouer ?</h3>
+          {isOpen && (
+            <p>
+              Nous avons une belle nouvelle à vous annoncer ! Mais avant cela, il va falloir jouer un peu.<br /><br />
+              Trouvez le prénom en 6 essais ! Chaque tentative doit être un prénom existant de 5 lettres.
+              Validez votre réponse en appuyant sur Entrée.<br /><br />
+              Après chaque essai, la couleur des cases vous indiquera si vous êtes sur la bonne voie :<br />
+              🟩 Vert : La lettre est bien placée.<br />
+              🟨 Jaune : La lettre est présente dans le prénom, mais mal placée.<br />
+              ⬜ Gris : La lettre ne fait pas partie du prénom à deviner.<br /><br />
+              Bonne chance ! 🎉
+            </p>
+          )}
+        </div>
+      }
       <AppContext.Provider
         value={{
           board,
@@ -104,6 +121,7 @@ function App() {
           setDisabledLetters,
           disabledLetters,
           gameOver,
+          onRestart
         }}
       >
         {gameOver.gameOver ? <div></div> : <Board />}

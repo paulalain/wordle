@@ -4,25 +4,23 @@ import babyPicture from '../bebe.jpg';
 
 function GameOver() {
   const {
-    board,
-    setBoard,
-    currAttempt,
     gameOver,
-    onSelectLetter,
     correctWord,
-    onDelete,
+    onRestart
   } = useContext(AppContext);
   return (
     <div className="gameOver">
-      <h3>
-        {gameOver.guessedWord
-          ? "Bravo vous avez trouver le prénom !"
-          : "Raté ! Retentez votre chance."}
-      </h3>
+      {!gameOver.guessedWord && (
+        <p>
+          C'est raté pour cette fois ! <a href='#' onClick={() => onRestart()}>Clique ici pour retenter ta chance</a>
+        </p>
+      )}
       {gameOver.guessedWord && (
         <p>
-          <h1>{correctWord} mesure 50cm et pèse 4,5kg</h1>
-          <img src={babyPicture} class="baby" />
+          Bravo vous avez trouver le prénom !
+          <h1>{correctWord} est né aujourd'hui à xx:xx</h1>
+          <img src={babyPicture} class="baby" /><br /><br />
+          Si vous souhaitez participer voici notre <a href="https://www.majolieliste.fr/liste/449634">liste de naissance</a>.
         </p>
       )}
     </div>
