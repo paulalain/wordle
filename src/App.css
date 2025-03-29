@@ -140,10 +140,6 @@ a {
   background-color: #3a393c;
 }
 
-#disabled {
-  background-color: #3a393c;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   nav h1 {

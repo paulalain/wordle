@@ -17,8 +17,8 @@ function GameOver() {
       )}
       {gameOver.guessedWord && (
         <p>
-          Bravo vous avez trouvé le bon prénom !
-          <h1>{correctWord} est né le xx AVRIL à xx:xx</h1>
+          <h1>Bravo vous avez trouvé le bon prénom !</h1>
+          <h2>Jacob - xx AVRIL à xx:xx</h2>
           <img src={babyPicture} class="baby" /><br /><br />
           Si vous souhaitez participer voici notre <a href="https://www.majolieliste.fr/liste/449634">liste de naissance</a>.
         </p>
