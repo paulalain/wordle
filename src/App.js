@@ -84,7 +84,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" lang="fr">
       <nav>
         <h1>Wordle</h1>
       </nav>
