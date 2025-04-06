@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../App";
-import babyPicture from '../bebe.jpg';
+import babyPicture from '../IMG_4073.jpeg';
 
 function GameOver() {
   const {
